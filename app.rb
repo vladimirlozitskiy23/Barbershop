@@ -31,17 +31,17 @@ get '/' do
 end
 
 get '/visit' do
-
+	@c = Client.new #без этого при гет запросе возникает ошибка что @с не установлена
 	erb :visit
 end
 
 
 post '/visit' do
-	c = Client.new params[:client]
-	if c.save
+	@c = Client.new params[:client]
+	if @c.save
 		erb "<h3>Thanks! You registred!</h3>"
 	else
-	@error = c.errors.full_messages.first
+	@error = @c.errors.full_messages.first
 		erb :visit
 	end
 
